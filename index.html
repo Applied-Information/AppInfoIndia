@@ -17,6 +17,16 @@
 </head>
 <body>
 
+  <!-- Preloader: covers the page until everything has loaded (hidden by main.js; CSS hides it after 8s as a fallback) -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-mark">
+      <span class="preloader-ring"></span>
+      <img src="assets/images/ai-icon.png" alt="" width="56" height="56" />
+    </div>
+    <p class="preloader-text">Saving lives with connectivity</p>
+    <div class="preloader-bar"><i></i></div>
+  </div>
+
   <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="announce" id="announce">
     <p><strong>ITS India Congress 2026:</strong> Glance Smart City Platform selected as one of the most impactful ITS technologies. &nbsp;<a href="#award">Read more →</a></p>

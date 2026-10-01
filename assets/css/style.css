@@ -97,6 +97,42 @@ section { padding: 88px 0; }
 .nav-toggle { display: none; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--c-text); }
 .nav-toggle svg { width: 26px; height: 26px; }
 
+/* Preloader */
+.preloader {
+  position: fixed; inset: 0; z-index: 1000;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
+  background:
+    radial-gradient(700px 420px at 80% -10%, rgba(86,200,240,.28), transparent 60%),
+    linear-gradient(160deg, var(--c-navy) 0%, var(--c-dark) 100%);
+  color: #cfe3f2;
+  transition: opacity .55s ease, visibility 0s linear .55s;
+  /* Fallback if the script never runs: fade out on its own after 8s */
+  animation: preloaderOut .55s ease 8s forwards;
+}
+.preloader.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+@keyframes preloaderOut { to { opacity: 0; visibility: hidden; } }
+.preloader-mark { position: relative; width: 96px; height: 96px; display: grid; place-items: center; }
+.preloader-mark img { width: 56px; height: 56px; border-radius: 50%; animation: preloaderPulse 1.6s ease-in-out infinite; }
+.preloader-ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0 55%, var(--c-accent2) 85%, #fff 100%);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
+  animation: spinLoader 1s linear infinite;
+}
+.preloader-text { margin: 0; font-family: var(--font-mono); font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: #9fc0d8; }
+.preloader-bar { width: 160px; height: 3px; border-radius: 3px; background: rgba(255,255,255,.12); overflow: hidden; }
+.preloader-bar i { display: block; width: 40%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--c-accent), var(--c-accent2)); animation: preloaderBar 1.2s ease-in-out infinite; }
+@keyframes preloaderPulse { 50% { transform: scale(.92); opacity: .85; } }
+@keyframes preloaderBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(250%); } }
+body.is-loading { overflow: hidden; }
+/* Hold scroll-reveal animations until the preloader lifts, so the hero animates in where people can see it */
+body.is-loading .reveal.in { opacity: 0; transform: translateY(24px); }
+@media (prefers-reduced-motion: reduce) {
+  .preloader-ring, .preloader-mark img, .preloader-bar i { animation: none; }
+  .preloader-ring { background: conic-gradient(var(--c-accent2) 0 30%, transparent 30%); }
+}
+
 /* Announcement bar */
 .announce {
   position: relative; overflow: hidden;

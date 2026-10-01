@@ -30,6 +30,24 @@ const AUTO_OPEN_DELAY = 12000;
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Preloader: lifts once the page and its images have finished loading (8s cap on very slow networks)
+const PRELOADER_MAX_MS = 8000;
+const preloader = document.getElementById('preloader');
+if (preloader) {
+  document.body.classList.add('is-loading');
+  let hidden = false;
+  const hidePreloader = () => {
+    if (hidden) return;
+    hidden = true;
+    preloader.classList.add('is-done');
+    document.body.classList.remove('is-loading');
+    setTimeout(() => preloader.remove(), 700);
+  };
+  if (document.readyState === 'complete') hidePreloader();
+  else window.addEventListener('load', hidePreloader, { once: true });
+  setTimeout(hidePreloader, PRELOADER_MAX_MS);
+}
+
 // Lazy images: the browser fetches them as they near the screen; fade each one in when it arrives.
 // The class is only added here, so without JS images simply show as normal.
 document.documentElement.classList.add('lazy-fade');
