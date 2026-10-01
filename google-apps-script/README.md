@@ -1,6 +1,6 @@
 # Enquiry form → Google Sheet
 
-The popup form on the landing page posts to a Google Apps Script web app, which appends each enquiry as a row in the leads sheet.
+The enquiry form on the contact page posts to a Google Apps Script web app, which appends each enquiry as a row in the leads sheet.
 
 ## One-time setup (about 5 minutes)
 

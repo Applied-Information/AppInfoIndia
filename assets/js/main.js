@@ -25,9 +25,6 @@ const SHEET_ENDPOINT = '';
 const MIN_FILL_MS = 3000;
 const SUBMIT_COOLDOWN_MS = 60000;
 
-// Open the enquiry popup automatically once per visit after this many ms (0 to disable)
-const AUTO_OPEN_DELAY = 12000;
-
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Preloader: lifts once the page and its images have finished loading (8s cap on very slow networks)
@@ -55,20 +52,6 @@ document.querySelectorAll('img[loading="lazy"]').forEach(img => {
   const done = () => img.classList.add('is-loaded');
   if (img.complete) done();
   else { img.addEventListener('load', done, { once: true }); img.addEventListener('error', done, { once: true }); }
-});
-
-// Announcement bar: the cross collapses it, and it stays hidden for the rest of the visit
-const announce = document.getElementById('announce');
-const ANNOUNCE_KEY = 'announceClosed';
-try { if (sessionStorage.getItem(ANNOUNCE_KEY)) announce.hidden = true; } catch { /* storage unavailable */ }
-document.getElementById('announceClose').addEventListener('click', () => {
-  try { sessionStorage.setItem(ANNOUNCE_KEY, '1'); } catch { /* storage unavailable */ }
-  if (reduceMotion) { announce.hidden = true; return; }
-  announce.style.height = announce.offsetHeight + 'px';
-  announce.offsetHeight; // commit the starting height so the collapse animates
-  announce.classList.add('is-closing');
-  announce.style.height = '0px';
-  announce.addEventListener('transitionend', e => { if (e.propertyName === 'height') announce.hidden = true; });
 });
 
 // Mobile menu: full-height panel under the header
@@ -99,7 +82,7 @@ window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
 // Scroll reveal, staggered within each group
-document.querySelectorAll('.sol-grid, .visit-grid, .pillars-bar, .impact-grid, .contact-cards, .award-timeline').forEach(group => {
+document.querySelectorAll('.contact-cards').forEach(group => {
   group.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = `${(i % 3) * 110}ms`; });
 });
 const io = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
@@ -107,60 +90,14 @@ const io = 'IntersectionObserver' in window ? new IntersectionObserver(entries =
 }, { threshold: .12 }) : null;
 document.querySelectorAll('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
 
-// Count-up stats
-const counters = document.querySelectorAll('[data-count]');
-const countIO = 'IntersectionObserver' in window && !reduceMotion ? new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    const el = e.target;
-    const target = +el.dataset.count;
-    const suffix = el.dataset.suffix || '';
-    const t0 = performance.now();
-    const step = now => {
-      const p = Math.min((now - t0) / 1400, 1);
-      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-    countIO.unobserve(el);
-  });
-}, { threshold: .6 }) : null;
-if (countIO) counters.forEach(el => countIO.observe(el));
-
 // Cursor spotlight on cards
-document.querySelectorAll('.sol-card, .visit-card').forEach(card => {
+document.querySelectorAll('.c-card').forEach(card => {
   card.addEventListener('pointermove', e => {
     const r = card.getBoundingClientRect();
     card.style.setProperty('--mx', `${e.clientX - r.left}px`);
     card.style.setProperty('--my', `${e.clientY - r.top}px`);
   });
 });
-
-// 3D tilt on hero photo
-const tilt = document.getElementById('tilt');
-if (tilt && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
-  const hero = document.querySelector('.hero');
-  hero.addEventListener('pointermove', e => {
-    const r = tilt.getBoundingClientRect();
-    const x = (e.clientX - (r.left + r.width / 2)) / r.width;
-    const y = (e.clientY - (r.top + r.height / 2)) / r.height;
-    tilt.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
-  });
-  hero.addEventListener('pointerleave', () => { tilt.style.transform = ''; });
-}
-
-// 3D tilt on award certificate
-const cert = document.getElementById('cert');
-if (cert && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
-  const award = document.getElementById('award');
-  award.addEventListener('pointermove', e => {
-    const r = cert.getBoundingClientRect();
-    const x = (e.clientX - (r.left + r.width / 2)) / r.width;
-    const y = (e.clientY - (r.top + r.height / 2)) / r.height;
-    cert.style.transform = `rotateY(${x * 14}deg) rotateX(${-y * 10}deg)`;
-  });
-  award.addEventListener('pointerleave', () => { cert.style.transform = ''; });
-}
 
 // Hero background: a connected-city network with data pulses travelling between nodes
 const canvas = document.getElementById('network');
@@ -241,60 +178,11 @@ if (canvas && !reduceMotion) {
   requestAnimationFrame(frame);
 }
 
-// Enquiry popup
-const modal = document.getElementById('leadModal');
-const form = document.getElementById('leadForm');
-const success = modal.querySelector('.form-success');
-const statusEl = form.querySelector('.form-status');
-const submitBtn = form.querySelector('.submit');
-let lastFocus = null;
-let openedAt = 0;
-let submitting = false;
-
+// Enquiry forms: the full form on the page and the short one in the "Book a Meeting" popup share one submit flow
 const session = {
   get: k => { try { return sessionStorage.getItem(k); } catch { return null; } },
   set: (k, v) => { try { sessionStorage.setItem(k, v); } catch { /* storage unavailable */ } }
 };
-
-function openForm() {
-  lastFocus = document.activeElement;
-  modal.hidden = false;
-  openedAt = Date.now();
-  document.body.classList.add('modal-open');
-  session.set('leadShown', '1');
-  setTimeout(() => (success.hidden ? form.querySelector('input[name=name]') : success.querySelector('button')).focus(), 50);
-}
-
-function closeForm() {
-  modal.hidden = true;
-  document.body.classList.remove('modal-open');
-  if (!success.hidden) {
-    success.hidden = true;
-    form.hidden = false;
-    form.reset();
-  }
-  if (lastFocus) lastFocus.focus();
-}
-
-document.querySelectorAll('[data-open-form]').forEach(el => el.addEventListener('click', e => {
-  e.preventDefault();
-  openForm();
-}));
-modal.querySelectorAll('[data-close-form]').forEach(el => el.addEventListener('click', closeForm));
-document.addEventListener('keydown', e => {
-  if (modal.hidden) return;
-  if (e.key === 'Escape') closeForm();
-  if (e.key === 'Tab') {
-    const focusables = [...modal.querySelectorAll('button, input:not([tabindex="-1"]), select, textarea')].filter(el => el.offsetParent);
-    const first = focusables[0], last = focusables[focusables.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-  }
-});
-
-if (AUTO_OPEN_DELAY && !session.get('leadShown')) {
-  setTimeout(() => { if (modal.hidden && !session.get('leadShown')) openForm(); }, AUTO_OPEN_DELAY);
-}
 
 // Explicit rules per field; the browser's own pattern check is not relied on
 const RULES = {
@@ -305,74 +193,163 @@ const RULES = {
 };
 const isValid = input => (RULES[input.name] || (v => v !== ''))(input.value.trim());
 
-function validate() {
-  let ok = true;
-  form.querySelectorAll('input[required]').forEach(input => {
-    const valid = isValid(input);
-    input.closest('.field').classList.toggle('invalid', !valid);
-    if (!valid && ok) { input.focus(); ok = false; }
+function setupForm(form) {
+  const statusEl = form.querySelector('.form-status');
+  const submitBtn = form.querySelector('.submit');
+  // Bot timing starts when a person first touches the form, not at page load
+  let openedAt = Date.now();
+  let touched = false;
+  let submitting = false;
+  form.addEventListener('focusin', () => { if (!touched) { touched = true; openedAt = Date.now(); } });
+
+  // On success the form is cleared and the thank-you popup takes over
+  function showSuccess() {
+    form.reset();
+    form.querySelectorAll('.field.invalid').forEach(el => el.classList.remove('invalid'));
+    statusEl.textContent = '';
+    touched = false;
+    if (form.closest('.modal')) closeModal({ restoreFocus: false });
+    showThanks();
+  }
+
+  function validate() {
+    let ok = true;
+    form.querySelectorAll('input[required]').forEach(input => {
+      const valid = isValid(input);
+      input.closest('.field').classList.toggle('invalid', !valid);
+      if (!valid && ok) { input.focus(); ok = false; }
+    });
+    return ok;
+  }
+  form.querySelectorAll('input[required]').forEach(input => input.addEventListener('input', () => {
+    if (isValid(input)) input.closest('.field').classList.remove('invalid');
+  }));
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (submitting) return;
+    statusEl.textContent = '';
+    statusEl.classList.remove('error');
+    if (!validate()) return;
+
+    const f = new FormData(form);
+    // Bots: honeypot filled or form completed impossibly fast. Show success so they don't retry.
+    if (f.get('website') || Date.now() - openedAt < MIN_FILL_MS) { showSuccess(); return; }
+
+    const lastSent = +session.get('leadSentAt') || 0;
+    if (Date.now() - lastSent < SUBMIT_COOLDOWN_MS) {
+      statusEl.textContent = 'Thanks, we already have your enquiry. Please wait a minute before sending another.';
+      statusEl.classList.add('error');
+      return;
+    }
+
+    submitting = true;
+    submitBtn.disabled = true;
+    submitBtn.classList.add('loading');
+    try {
+      if (GOOGLE_FORM.action) {
+        // Google Form: posted in the background; the response is opaque, so a resolved fetch counts as sent
+        const body = new URLSearchParams();
+        Object.entries(GOOGLE_FORM.fields).forEach(([key, entry]) => {
+          if (entry && f.get(key)) body.append(entry, f.get(key));
+        });
+        await fetch(GOOGLE_FORM.action, { method: 'POST', mode: 'no-cors', body });
+      } else if (SHEET_ENDPOINT) {
+        const body = new URLSearchParams(f);
+        body.append('source', form.dataset.source || 'India contact page');
+        body.append('page', location.href);
+        const res = await fetch(SHEET_ENDPOINT, { method: 'POST', body });
+        const out = await res.json();
+        if (!out.ok) throw new Error(out.error || 'Submission failed');
+      } else {
+        throw new Error('No form endpoint configured: set GOOGLE_FORM or SHEET_ENDPOINT in assets/js/main.js');
+      }
+      session.set('leadSentAt', String(Date.now()));
+      showSuccess();
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = 'Something went wrong. Please try again or email skashyap@appinfoinc.com.';
+      statusEl.classList.add('error');
+    } finally {
+      submitting = false;
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('loading');
+    }
   });
-  return ok;
 }
-form.querySelectorAll('input[required]').forEach(input => input.addEventListener('input', () => {
-  if (isValid(input)) input.closest('.field').classList.remove('invalid');
+
+const leadForm = document.getElementById('leadForm');
+setupForm(leadForm);
+setupForm(document.getElementById('quickForm'));
+
+// "Request a meeting" buttons scroll to the full form and put the cursor in the first field
+document.querySelectorAll('[data-open-form]').forEach(el => el.addEventListener('click', e => {
+  e.preventDefault();
+  const target = document.getElementById('enquiry');
+  target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  target.classList.remove('flash'); target.offsetWidth; target.classList.add('flash');
+  setTimeout(() => leadForm.querySelector('input[name=name]').focus({ preventScroll: true }), reduceMotion ? 0 : 600);
 }));
 
-form.addEventListener('submit', async e => {
-  e.preventDefault();
-  if (submitting) return;
-  statusEl.textContent = '';
-  statusEl.classList.remove('error');
-  if (!validate()) return;
+// "Book a Meeting" popup (floating button)
+const modal = document.getElementById('leadModal');
+let lastFocus = null;
 
-  const f = new FormData(form);
-  // Bots: honeypot filled or form completed impossibly fast. Show success so they don't retry.
-  if (f.get('website') || Date.now() - openedAt < MIN_FILL_MS) {
-    form.hidden = true;
-    success.hidden = false;
+function openModal() {
+  lastFocus = document.activeElement;
+  modal.hidden = false;
+  document.body.classList.add('modal-open');
+  setTimeout(() => modal.querySelector('input[name=name]').focus(), 50);
+}
+function closeModal({ restoreFocus = true } = {}) {
+  modal.hidden = true;
+  document.body.classList.remove('modal-open');
+  if (restoreFocus && lastFocus) lastFocus.focus();
+}
+
+// Thank-you popup: shown after either form is sent, closes itself after THANKS_MS
+const THANKS_MS = 8000;
+const thanks = document.getElementById('thanksModal');
+const thanksCount = thanks.querySelector('[data-countdown]');
+let thanksTimer = null, thanksTick = null, thanksFocus = null;
+
+function showThanks() {
+  thanksFocus = lastFocus && !document.body.contains(document.activeElement) ? lastFocus : document.activeElement;
+  thanks.hidden = false;
+  document.body.classList.add('modal-open');
+  // Restart the countdown bar animation
+  thanks.classList.remove('counting'); thanks.offsetWidth; thanks.classList.add('counting');
+  let left = THANKS_MS / 1000;
+  thanksCount.textContent = left;
+  clearInterval(thanksTick); clearTimeout(thanksTimer);
+  thanksTick = setInterval(() => { left = Math.max(0, left - 1); thanksCount.textContent = left; }, 1000);
+  thanksTimer = setTimeout(hideThanks, THANKS_MS);
+  setTimeout(() => thanks.querySelector('[data-close-thanks].btn').focus(), 50);
+}
+function hideThanks() {
+  if (thanks.hidden) return;
+  clearInterval(thanksTick); clearTimeout(thanksTimer);
+  thanks.hidden = true;
+  if (modal.hidden) document.body.classList.remove('modal-open');
+  if (thanksFocus && document.body.contains(thanksFocus)) thanksFocus.focus({ preventScroll: true });
+}
+thanks.querySelectorAll('[data-close-thanks]').forEach(el => el.addEventListener('click', hideThanks));
+
+document.querySelectorAll('[data-open-modal]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); openModal(); }));
+modal.querySelectorAll('[data-close-form]').forEach(el => el.addEventListener('click', closeModal));
+document.addEventListener('keydown', e => {
+  if (!thanks.hidden) {
+    if (e.key === 'Escape') hideThanks();
+    if (e.key === 'Tab') { e.preventDefault(); thanks.querySelector('[data-close-thanks].btn').focus(); }
     return;
   }
-
-  const lastSent = +session.get('leadSentAt') || 0;
-  if (Date.now() - lastSent < SUBMIT_COOLDOWN_MS) {
-    statusEl.textContent = 'Thanks, we already have your enquiry. Please wait a minute before sending another.';
-    statusEl.classList.add('error');
-    return;
-  }
-
-  submitting = true;
-  submitBtn.disabled = true;
-  submitBtn.classList.add('loading');
-  try {
-    if (GOOGLE_FORM.action) {
-      // Google Form: posted in the background; the response is opaque, so a resolved fetch counts as sent
-      const body = new URLSearchParams();
-      Object.entries(GOOGLE_FORM.fields).forEach(([key, entry]) => {
-        if (entry && f.get(key)) body.append(entry, f.get(key));
-      });
-      await fetch(GOOGLE_FORM.action, { method: 'POST', mode: 'no-cors', body });
-    } else if (SHEET_ENDPOINT) {
-      const body = new URLSearchParams(f);
-      body.append('source', 'India landing page');
-      body.append('page', location.href);
-      const res = await fetch(SHEET_ENDPOINT, { method: 'POST', body });
-      const out = await res.json();
-      if (!out.ok) throw new Error(out.error || 'Submission failed');
-    } else {
-      throw new Error('No form endpoint configured: set GOOGLE_FORM or SHEET_ENDPOINT in assets/js/main.js');
-    }
-    session.set('leadSentAt', String(Date.now()));
-    form.hidden = true;
-    success.hidden = false;
-    success.querySelector('button').focus();
-  } catch (err) {
-    console.error(err);
-    statusEl.textContent = 'Something went wrong. Please try again or email skashyap@appinfoinc.com.';
-    statusEl.classList.add('error');
-  } finally {
-    submitting = false;
-    submitBtn.disabled = false;
-    submitBtn.classList.remove('loading');
+  if (modal.hidden) return;
+  if (e.key === 'Escape') closeModal();
+  if (e.key === 'Tab') {
+    const focusables = [...modal.querySelectorAll('button, input:not([tabindex="-1"]), select, textarea')].filter(el => el.offsetParent);
+    const first = focusables[0], last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   }
 });
 
