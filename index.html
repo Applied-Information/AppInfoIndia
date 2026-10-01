@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en" data-theme="glance">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Security policy. GitHub Pages cannot send custom headers, so these are set here.
+       If you add a new external script, font, image host, embed or form endpoint, allow it below. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.google.com; connect-src 'self' https://docs.google.com https://script.google.com https://script.googleusercontent.com; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Applied Information India | Glance Smart City Platform</title>
+  <meta name="description" content="Applied Information Traffic India Pvt. Ltd. – Glance® connected smart city and traffic safety solutions. Engineering and support from our Mohali office." />
+  <link rel="icon" type="image/png" href="assets/images/ai-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <div class="announce" id="announce">
+    <p><strong>ITS India Congress 2026:</strong> Glance Smart City Platform selected as one of the most impactful ITS technologies. &nbsp;<a href="#award">Read more →</a></p>
+    <button type="button" class="announce-close" id="announceClose" aria-label="Dismiss announcement">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav" id="nav">
+      <a href="#home" class="nav-logo" aria-label="Applied Information home">
+        <img src="assets/images/AI-horizontal-logo-R-gray-454x116-1.png" alt="Applied Information" width="157" height="40" />
+      </a>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="#award">Recognition</a></li>
+        <li><a href="#platform">Glance Platform</a></li>
+        <li><a href="#solutions">Solutions</a></li>
+        <li><a href="#contact">India Office</a></li>
+        <!-- Shown only in the mobile menu panel -->
+        <li class="nav-extra">
+          <a href="#contact" class="btn btn-primary" data-open-form>Book a Meeting</a>
+          <div class="nav-contact">
+            <a href="mailto:vkumar@appinfoinc.com">vkumar@appinfoinc.com</a>
+            <a href="tel:+919876326206">+91-98763-26206</a>
+          </div>
+        </li>
+      </ul>
+      <a href="#contact" class="btn btn-primary nav-cta" data-open-form>Book a Meeting</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu" id="navToggle">
+        <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="aurora a1" aria-hidden="true"></div>
+      <div class="aurora a2" aria-hidden="true"></div>
+      <div class="aurora a3" aria-hidden="true"></div>
+      <canvas id="network" aria-hidden="true"></canvas>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="reveal">
+            <div class="live-pill"><i></i>Applied Information · India</div>
+            <h1>Saving lives with <span class="hl">connectivity</span></h1>
+            <p class="hero-sub">Glance® is the smart city platform that connects every traffic signal, school zone, emergency vehicle and road user, so Indian cities can make roads safer and keep traffic moving.</p>
+            <div class="hero-actions">
+              <a href="#solutions" class="btn btn-light">
+                Explore Solutions
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <a href="#contact" class="btn btn-ghost" data-open-form>Contact India Team</a>
+            </div>
+            <div class="trust">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Trusted by <b>Qualcomm, 5GAA &amp; Ford</b></span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>C-V2X</b> ready</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Offices in <b>USA · India · South Africa</b></span>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal">
+            <div class="photo-wrap" id="tilt">
+              <img class="hero-photo" src="assets/images/audi-CV2X-7-scaled-e1786454446271-1024x1024.jpg" srcset="assets/images/audi-CV2X-7-scaled-e1786454446271-1024x1024-640w.webp 640w, assets/images/audi-CV2X-7-scaled-e1786454446271-1024x1024.jpg 1024w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 880px) 560px, 480px" fetchpriority="high" decoding="async" alt="Connected vehicle receiving live traffic signal data" width="1024" height="1024" />
+            </div>
+            <div class="rings" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="chip-live c1" aria-hidden="true"><i></i>SPaT · Green in 4s</div>
+            <div class="chip-live c2" aria-hidden="true"><i></i>EV preempt · cleared</div>
+            <div class="hero-logo-card">
+              <img src="assets/images/glance-by-ai.webp" alt="Glance powered by Applied Information" width="420" height="280" loading="lazy" decoding="async" />
+              <span>One platform. Everything connected.</span>
+            </div>
+            <a href="#award" class="hero-award">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5L2.6 9.3l6.5-.9z"/></svg>
+              <span><b>ITS India Congress 2026</b>Most impactful ITS technology</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="pillars-bar">
+          <div class="pillar reveal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+            <div><b>Innovative Solutions</b><span>Cloud-connected traffic infrastructure</span></div>
+          </div>
+          <div class="pillar reveal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <div><b>Safer Roads</b><span>Protecting pedestrians, students &amp; responders</span></div>
+          </div>
+          <div class="pillar reveal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M15 14.5a5 5 0 0 1 6.5 5.5"/></svg>
+            <div><b>Connected Communities</b><span>Smarter cities, brighter tomorrow</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Emergency Vehicle Preemption</span><span>School Zone Beacons</span><span>C-V2X Connected Vehicles</span><span>Transit Signal Priority</span><span>Intersection Monitoring</span><span>TravelSafely™</span><span>Streetlight Monitoring</span><span>Wrong-Way Detection</span><span>Freight Signal Priority</span>
+        <span>Emergency Vehicle Preemption</span><span>School Zone Beacons</span><span>C-V2X Connected Vehicles</span><span>Transit Signal Priority</span><span>Intersection Monitoring</span><span>TravelSafely™</span><span>Streetlight Monitoring</span><span>Wrong-Way Detection</span><span>Freight Signal Priority</span>
+      </div>
+    </div>
+
+    <!-- AWARD -->
+    <section class="award" id="award">
+      <div class="award-glow" aria-hidden="true"></div>
+      <div class="container-fluid award-grid">
+        <div class="award-copy reveal">
+          <span class="award-tag">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5L2.6 9.3l6.5-.9z"/></svg>
+            ITS India Congress 2026 · Emerging Technologies
+          </span>
+          <h2>Recognised as one of the <em>most impactful</em> ITS technologies in India</h2>
+          <p class="award-lead">The <b>Glance Smart City Platform</b> by Applied Information, Inc. was chosen by the jury and audience at NRSTC-2026, IIT Bombay.</p>
+
+          <ol class="award-timeline">
+            <li>
+              <span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <div>
+                <small>Selected</small>
+                <b>NRSTC-2026, IIT Bombay</b>
+                <span>Chosen by the jury &amp; audience</span>
+              </div>
+            </li>
+            <li>
+              <span class="dot live" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5L2.6 9.3l6.5-.9z"/></svg></span>
+              <div>
+                <small>Award ceremony</small>
+                <b>8 October 2026, New Delhi</b>
+                <span>Presented by the Chief Guest at ITS India Congress 2026</span>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="award-visual reveal">
+          <div class="cert" id="cert">
+            <div class="cert-inner">
+              <div class="cert-head">
+                <img src="assets/images/ai-icon.png" alt="" width="44" height="44" loading="lazy" decoding="async" />
+                <span>ITS India Congress · 2026</span>
+              </div>
+              <svg class="laurel" viewBox="0 0 200 120" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                  <path d="M60 110 C30 90 22 55 34 20"/>
+                  <path d="M140 110 C170 90 178 55 166 20"/>
+                </g>
+                <g fill="currentColor">
+                  <ellipse cx="30" cy="40" rx="5" ry="11" transform="rotate(-25 30 40)"/>
+                  <ellipse cx="29" cy="62" rx="5" ry="11" transform="rotate(-45 29 62)"/>
+                  <ellipse cx="37" cy="83" rx="5" ry="11" transform="rotate(-65 37 83)"/>
+                  <ellipse cx="51" cy="100" rx="5" ry="11" transform="rotate(-80 51 100)"/>
+                  <ellipse cx="170" cy="40" rx="5" ry="11" transform="rotate(25 170 40)"/>
+                  <ellipse cx="171" cy="62" rx="5" ry="11" transform="rotate(45 171 62)"/>
+                  <ellipse cx="163" cy="83" rx="5" ry="11" transform="rotate(65 163 83)"/>
+                  <ellipse cx="149" cy="100" rx="5" ry="11" transform="rotate(80 149 100)"/>
+                </g>
+                <path d="M100 30l7.4 15 16.6 2.4-12 11.7 2.8 16.5L100 67.8l-14.8 7.8 2.8-16.5-12-11.7 16.6-2.4z" fill="currentColor"/>
+              </svg>
+              <p class="cert-kicker">Certificate of Recognition</p>
+              <h3>The Glance Smart City Platform</h3>
+              <p class="cert-org">Applied Information, Inc.</p>
+              <div class="cert-foot">
+                <span>Emerging Technologies</span>
+                <span>NRSTC-2026 · IIT Bombay</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLATFORM -->
+    <section id="platform">
+      <div class="container platform-grid">
+        <div class="platform-media reveal">
+          <img src="assets/images/Home-Intersections-1024x854.webp" srcset="assets/images/Home-Intersections-1024x854-640w.webp 640w, assets/images/Home-Intersections-1024x854.webp 1024w" sizes="(max-width: 880px) min(600px, calc(100vw - 32px)), 560px" alt="Glance dashboard showing connected intersections across a city" loading="lazy" decoding="async" width="1024" height="854" />
+          <div class="tag"><i></i> Live intersection monitoring</div>
+        </div>
+        <div class="reveal">
+          <p class="eyebrow">The Glance® Smart City System</p>
+          <h2>One platform. <span class="grad-text">Everything connected.</span></h2>
+          <p class="lead">Glance is a cloud platform that connects a city's infrastructure (traffic signals, school beacons, streetlights and vehicles) so agencies can monitor, control and improve them from one place.</p>
+          <ul class="check-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Monitor and control all connected assets from a single dashboard</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Automated alerts by SMS and email cut downtime and response time</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Connected-vehicle ready: C-V2X, 4G LTE and 900 MHz, with 5G compatibility</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Built for Indian cities, with engineering and support from our Mohali office</li>
+          </ul>
+          <div class="stats">
+            <div class="stat"><b data-count="15" data-suffix="+">15+</b><span>Integrated smart-mobility solutions</span></div>
+            <div class="stat"><b data-count="3">3</b><span>Continents: USA, India, South Africa</span></div>
+            <div class="stat"><b>1</b><span>Platform, everything connected</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUTIONS -->
+    <section class="solutions" id="solutions">
+      <div class="container">
+        <div class="section-head center reveal">
+          <p class="eyebrow">Products &amp; Solutions</p>
+          <h2>Connected solutions for <span class="grad-text">safer, smarter roads</span></h2>
+          <p class="lead">Each solution runs on Glance, so you can start with one and add the rest on the same platform.</p>
+        </div>
+
+        <div class="sol-grid">
+          <article class="sol-card reveal">
+            <div class="media"><img src="assets/images/emergency-vehicle-preemption-960w.webp" srcset="assets/images/emergency-vehicle-preemption-640w.webp 640w, assets/images/emergency-vehicle-preemption-960w.webp 960w, assets/images/emergency-vehicle-preemption.webp 1280w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1024px) 50vw, 380px" alt="Emergency vehicle preemption system" loading="lazy" decoding="async" width="1280" height="720" /></div>
+            <div class="body">
+              <h3>Emergency Vehicle Preemption</h3>
+              <p>Gives ambulances and fire trucks green lights so they reach emergencies faster and more safely.</p>
+              <ul>
+                <li>Real-time vehicle location &amp; status</li>
+                <li>GPS with dead reckoning in low-signal areas</li>
+                <li>Rules-based configuration engine</li>
+              </ul>
+              <a class="more" href="https://appinfoinc.com/solutions/preemption-priority/" target="_blank" rel="noopener">Learn more →</a>
+            </div>
+          </article>
+
+          <article class="sol-card reveal">
+            <div class="media"><img src="assets/images/building-smarter-cities2-1-960w.webp" srcset="assets/images/building-smarter-cities2-1-640w.webp 640w, assets/images/building-smarter-cities2-1-960w.webp 960w, assets/images/building-smarter-cities2-1.webp 1280w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1024px) 50vw, 380px" alt="Connected school zone flashing beacons" loading="lazy" decoding="async" width="1280" height="720" /></div>
+            <div class="body">
+              <h3>School Zone Flashing Beacons</h3>
+              <p>A connected pedestrian-safety system that keeps students safe in school zones.</p>
+              <ul>
+                <li>View &amp; control every beacon remotely</li>
+                <li>Advanced scheduling &amp; overrides</li>
+                <li>Complete speed feedback systems</li>
+              </ul>
+              <a class="more" href="https://appinfoinc.com/solutions/school-zone-flashing-beacons/" target="_blank" rel="noopener">Learn more →</a>
+            </div>
+          </article>
+
+          <article class="sol-card reveal">
+            <div class="media"><img src="assets/images/remotely-manage-traffic-devices-1-960w.webp" srcset="assets/images/remotely-manage-traffic-devices-1-640w.webp 640w, assets/images/remotely-manage-traffic-devices-1-960w.webp 960w, assets/images/remotely-manage-traffic-devices-1.webp 1280w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1024px) 50vw, 380px" alt="Remotely manage traffic devices" loading="lazy" decoding="async" width="1280" height="720" /></div>
+            <div class="body">
+              <h3>Intersection Status &amp; Monitoring</h3>
+              <p>A dashboard to manage traffic signal infrastructure across the whole network.</p>
+              <ul>
+                <li>Automated, continuous monitoring</li>
+                <li>Reduced downtime, faster response</li>
+                <li>SMS / email status notifications</li>
+              </ul>
+              <a class="more" href="https://appinfoinc.com/solutions/intersection-status-and-monitoring-system/" target="_blank" rel="noopener">Learn more →</a>
+            </div>
+          </article>
+
+          <article class="sol-card reveal">
+            <div class="media"><img src="assets/images/audi-CV2X-7-scaled-e1786454446271-1024x1024-640w.webp" srcset="assets/images/audi-CV2X-7-scaled-e1786454446271-1024x1024-640w.webp 640w, assets/images/audi-CV2X-7-scaled-e1786454446271-1024x1024.jpg 1024w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1024px) 50vw, 380px" alt="Connected vehicle using C-V2X" loading="lazy" decoding="async" width="1024" height="1024" /></div>
+            <div class="body">
+              <h3>Connected Vehicle (C-V2X)</h3>
+              <p>Multi-protocol vehicle-to-infrastructure communication, trusted by Qualcomm, 5GAA and Ford.</p>
+              <ul>
+                <li>C-V2X, 4G LTE &amp; 900 MHz</li>
+                <li>5G future compatibility</li>
+                <li>Signal phase &amp; timing to vehicles</li>
+              </ul>
+              <a class="more" href="https://appinfoinc.com/solutions/connected-vehicle-solutions/" target="_blank" rel="noopener">Learn more →</a>
+            </div>
+          </article>
+
+          <article class="sol-card reveal">
+            <div class="media"><img src="assets/images/transit-signal-priority-2-960w.webp" srcset="assets/images/transit-signal-priority-2-640w.webp 640w, assets/images/transit-signal-priority-2-960w.webp 960w, assets/images/transit-signal-priority-2.webp 1280w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1024px) 50vw, 380px" alt="Transit signal priority" loading="lazy" decoding="async" width="1280" height="720" /></div>
+            <div class="body">
+              <h3>Transit &amp; Freight Signal Priority</h3>
+              <p>Keeps buses on schedule and freight moving by giving them priority at intersections.</p>
+              <ul>
+                <li>Transit priority with near-side stop optimisation</li>
+                <li>Freight signal priority on key corridors</li>
+                <li>Connected school bus tracking</li>
+              </ul>
+              <a class="more" href="https://appinfoinc.com/solutions/transit-signal-priority-systems/" target="_blank" rel="noopener">Learn more →</a>
+            </div>
+          </article>
+
+          <article class="sol-card reveal">
+            <div class="media"><img src="assets/images/travelsafely-app-for-safer-travel-960w.webp" srcset="assets/images/travelsafely-app-for-safer-travel-640w.webp 640w, assets/images/travelsafely-app-for-safer-travel-960w.webp 960w, assets/images/travelsafely-app-for-safer-travel.webp 1280w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1024px) 50vw, 380px" alt="TravelSafely app" loading="lazy" decoding="async" width="1280" height="720" /></div>
+            <div class="body">
+              <h3>TravelSafely™ App</h3>
+              <p>Alerts drivers inside the vehicle about hazards on the road ahead.</p>
+              <ul>
+                <li>Red-light warnings in real time</li>
+                <li>School zone &amp; pedestrian alerts</li>
+                <li>Emergency vehicle approach alerts</li>
+              </ul>
+              <a class="more" href="https://travelsafelyapp.com" target="_blank" rel="noopener">travelsafelyapp.com →</a>
+            </div>
+          </article>
+
+          <article class="sol-card reveal">
+            <div class="media"><img src="assets/images/street-light-monitoring-960w.webp" srcset="assets/images/street-light-monitoring-640w.webp 640w, assets/images/street-light-monitoring-960w.webp 960w, assets/images/street-light-monitoring.webp 1280w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1024px) 50vw, 380px" alt="Streetlight monitoring" loading="lazy" decoding="async" width="1280" height="720" /></div>
+            <div class="body">
+              <h3>Streetlight Monitoring</h3>
+              <p>Remote asset management for a city's street lighting.</p>
+              <ul>
+                <li>Fault detection &amp; alerts</li>
+                <li>Remote scheduling &amp; control</li>
+                <li>Energy savings insights</li>
+              </ul>
+              <a class="more" href="https://appinfoinc.com/solutions/street-light-monitoring/" target="_blank" rel="noopener">Learn more →</a>
+            </div>
+          </article>
+
+          <article class="sol-card reveal">
+            <div class="media"><img src="assets/images/police-priority-solution-960w.webp" srcset="assets/images/police-priority-solution-640w.webp 640w, assets/images/police-priority-solution-960w.webp 960w, assets/images/police-priority-solution.webp 1280w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 1024px) 50vw, 380px" alt="Police priority solution" loading="lazy" decoding="async" width="1280" height="720" /></div>
+            <div class="body">
+              <h3>Police Priority</h3>
+              <p>Signal priority for law-enforcement vehicles responding to incidents.</p>
+              <ul>
+                <li>Safer, faster incident response</li>
+                <li>Works alongside EV preemption</li>
+                <li>Full audit trail in Glance</li>
+              </ul>
+              <a class="more" href="https://appinfoinc.com/solutions/preemption-priority/" target="_blank" rel="noopener">Learn more →</a>
+            </div>
+          </article>
+
+          <article class="sol-card reveal">
+            <div class="media"><img src="assets/images/preemption-light.webp" alt="Pedestrian safety and wrong-way detection" loading="lazy" decoding="async" width="386" height="687" class="pos-top" /></div>
+            <div class="body">
+              <h3>Pedestrian Safety &amp; Wrong-Way Detection</h3>
+              <p>Infrastructure that protects people at crossings and stops wrong-way driving.</p>
+              <ul>
+                <li>Connected pedestrian crossings</li>
+                <li>Wrong-way driver detection &amp; alerts</li>
+                <li>Video+ remote communications</li>
+              </ul>
+              <a class="more" href="https://appinfoinc.com/solutions/pedestrian-safety/" target="_blank" rel="noopener">Learn more →</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="chips reveal">
+          <a class="chip" href="https://appinfoinc.com/solutions/connected-school-bus-system/" target="_blank" rel="noopener">Connected School Bus</a>
+          <a class="chip" href="https://appinfoinc.com/solutions/smart-school-traffic-safety/" target="_blank" rel="noopener">Smart School Traffic Safety</a>
+          <a class="chip" href="https://appinfoinc.com/solutions/video-plus/" target="_blank" rel="noopener">Video+ Remote Comms</a>
+          <a class="chip" href="https://appinfoinc.com/solutions/convenient-security/" target="_blank" rel="noopener">Convenient Security</a>
+          <a class="chip" href="https://appinfoinc.com/solutions/freight-signal-priority/" target="_blank" rel="noopener">Freight Signal Priority</a>
+          <a class="chip" href="https://appinfoinc.com/glance-certified-installer-program/" target="_blank" rel="noopener">Glance® Certified Installer Program</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MISSION -->
+    <section class="mission">
+      <div class="container-fluid">
+        <div class="mission-head reveal">
+          <div>
+            <p class="eyebrow">Our mission</p>
+            <h2>Technology that makes every road safer</h2>
+          </div>
+          <p>Glance helps Indian cities, highway authorities and smart-city SPVs build safer, more efficient road networks.</p>
+        </div>
+        <div class="impact-grid">
+          <article class="impact reveal">
+            <span class="num" aria-hidden="true">01</span>
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/><path d="M3.2 12H8l2-3 3 6 2-3h5.8"/></svg></div>
+            <h3>Save Lives</h3>
+            <p>Faster emergency response and protected school zones and crossings.</p>
+            <div class="bar"><i></i></div>
+          </article>
+          <article class="impact reveal">
+            <span class="num" aria-hidden="true">02</span>
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="3"/><circle cx="12" cy="7" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="17" r="1.6"/></svg></div>
+            <h3>Improve Traffic</h3>
+            <p>Connected signals that cut delays and keep corridors flowing.</p>
+            <div class="bar"><i></i></div>
+          </article>
+          <article class="impact reveal">
+            <span class="num" aria-hidden="true">03</span>
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h14v13H1z"/><path d="M15 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+            <h3>Drive Commerce</h3>
+            <p>Freight and transit priority that moves goods and people on time.</p>
+            <div class="bar"><i></i></div>
+          </article>
+          <article class="impact reveal">
+            <span class="num" aria-hidden="true">04</span>
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.1-6"/></svg></div>
+            <h3>Help the Environment</h3>
+            <p>Less idling at red lights means lower fuel use and emissions.</p>
+            <div class="bar"><i></i></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY US -->
+    <section>
+      <div class="container">
+        <div class="section-head center reveal">
+          <p class="eyebrow">Why Applied Information</p>
+          <h2>Proven worldwide, <span class="grad-text">built for India</span></h2>
+        </div>
+        <div class="visit-grid">
+          <div class="visit-card reveal">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M17 11h5M19.5 8.5v5"/></svg></div>
+            <h3>Local India team</h3>
+            <p>Engineering, deployment and support from our Mohali office, close to the cities we work with.</p>
+          </div>
+          <div class="visit-card reveal">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+            <h3>Recognised technology</h3>
+            <p>Glance was selected as one of the most impactful ITS technologies at ITS India Congress 2026.</p>
+          </div>
+          <div class="visit-card reveal">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
+            <h3>One scalable platform</h3>
+            <p>Start with one solution and add more on the same cloud platform as your city grows.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="reveal">
+          <p class="eyebrow">Contact · India Office</p>
+          <h2>Let's build safer roads in India</h2>
+          <p class="lead">Talk to our Mohali team about pilots, partnerships and deployments across India.</p>
+        </div>
+
+        <div class="contact-cards">
+          <div class="c-card reveal">
+            <div class="c-label">India Office</div>
+            <h3>Applied Information Traffic India Pvt. Ltd.</h3>
+            <div class="info-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <div><small>Address</small>4th Floor, Quark City SEZ, Phase VIII B, Mohali, Punjab 160059, India</div>
+            </div>
+            <div class="info-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+              <div><small>Website</small><a href="https://appinfoinc.com" target="_blank" rel="noopener">www.appinfoinc.com</a></div>
+            </div>
+            <div class="actions">
+              <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Quark+City+SEZ+Phase+8B+Mohali" target="_blank" rel="noopener">Get Directions</a>
+            </div>
+          </div>
+
+          <div class="c-card reveal">
+            <div class="c-label">Talk to us</div>
+            <div class="person-top">
+              <div class="avatar" aria-hidden="true">VK</div>
+              <div>
+                <h3>Vijay Kumar</h3>
+                <div class="role">Director, India</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+              <div><small>Email</small><a href="mailto:vkumar@appinfoinc.com">vkumar@appinfoinc.com</a></div>
+            </div>
+            <div class="info-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+              <div><small>Phone</small><a href="tel:+919876326206">+91-98763-26206</a></div>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="#contact" data-open-form>Request a Meeting</a>
+            </div>
+          </div>
+
+          <div class="c-card reveal">
+            <div class="c-label">Global offices</div>
+            <h3>Worldwide presence</h3>
+            <div class="office-list">
+              <div>
+                <h4><span>HQ</span> United States</h4>
+                <p>3000 Summit Place, Suite 150, Northwinds Summit, Alpharetta, GA 30009</p>
+              </div>
+              <div>
+                <h4><span>ZA</span> South Africa</h4>
+                <p>Bloemhof Square, Unit 101, Corner of Bill Bezuidenhout Ave &amp; Bloemhof Rd, Bellville 7530, Cape Town</p>
+              </div>
+              <div>
+                <h4><span>IN</span> India</h4>
+                <p>Quark City SEZ, Mohali, Punjab</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-wrap reveal">
+          <iframe title="Map of Quark City SEZ, Mohali" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+            src="https://www.google.com/maps?q=Quark+City+SEZ,+Phase+8B,+Industrial+Area,+Sector+74,+Mohali,+Punjab+160059&z=15&output=embed"></iframe>
+          <div class="map-card">
+            <div class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+            <div><b>Quark City SEZ, Mohali</b><span>4th Floor, Phase VIII B, Punjab 160059</span></div>
+            <a class="btn btn-light" href="https://www.google.com/maps/search/?api=1&query=Quark+City+SEZ+Phase+8B+Mohali" target="_blank" rel="noopener">Directions</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="assets/images/AI-horizontal-logo-R-gray-454x116-1.png" alt="Applied Information" width="204" height="52" loading="lazy" decoding="async" />
+          <p>Saving lives with connectivity. Glance® connects traffic infrastructure, vehicles and road users on one smart city platform.</p>
+          <a class="glance-mini" href="https://appinfoinc.com/solutions/glance-smart-city-system/" target="_blank" rel="noopener"><i></i>Glance® Smart City Platform</a>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#award">Recognition</a></li>
+            <li><a href="#platform">Glance Platform</a></li>
+            <li><a href="#solutions">Solutions</a></li>
+            <li><a href="#contact">India Office</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <ul>
+            <li><a href="https://appinfoinc.com/solutions/preemption-priority/" target="_blank" rel="noopener">EV Preemption</a></li>
+            <li><a href="https://appinfoinc.com/solutions/school-zone-flashing-beacons/" target="_blank" rel="noopener">School Zone Beacons</a></li>
+            <li><a href="https://appinfoinc.com/solutions/connected-vehicle-solutions/" target="_blank" rel="noopener">Connected Vehicle</a></li>
+            <li><a href="https://travelsafelyapp.com" target="_blank" rel="noopener">TravelSafely™</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>India Office</h4>
+          <ul class="footer-contact">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>4th Floor, Quark City SEZ, Phase VIII B, Mohali, Punjab 160059</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><a href="mailto:vkumar@appinfoinc.com">vkumar@appinfoinc.com</a></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><a href="tel:+919876326206">+91-98763-26206</a></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg><a href="https://appinfoinc.com" target="_blank" rel="noopener">www.appinfoinc.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> Applied Information Traffic India Pvt. Ltd. Glance® is a registered trademark of Applied Information, Inc.</span>
+        <a href="#home" class="to-top">Back to top <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING CTA -->
+  <button type="button" class="fab" data-open-form aria-label="Get in touch">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span>Get in touch</span>
+  </button>
+
+  <!-- ENQUIRY POPUP -->
+  <div class="modal" id="leadModal" role="dialog" aria-modal="true" aria-labelledby="leadTitle" hidden>
+    <div class="modal-backdrop" data-close-form></div>
+    <div class="modal-panel">
+      <button type="button" class="modal-close" data-close-form aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+
+      <aside class="modal-side">
+        <img src="assets/images/glance-by-ai.webp" alt="Glance powered by Applied Information" width="420" height="280" loading="lazy" decoding="async" />
+        <h3>Let's make your roads safer</h3>
+        <p>Tell us about your city or project and our India team will get back to you within one business day.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Personalised Glance demo</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Pilot &amp; deployment planning</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Local support from Mohali</li>
+        </ul>
+      </aside>
+
+      <div class="modal-body">
+        <form id="leadForm" novalidate>
+          <p class="eyebrow">Book a meeting</p>
+          <h2 id="leadTitle">Talk to our India team</h2>
+
+          <div class="form-grid">
+            <label class="field">
+              <span>Full name <em>*</em></span>
+              <input type="text" name="name" autocomplete="name" required maxlength="120" />
+              <small class="err">Please enter your name</small>
+            </label>
+            <label class="field">
+              <span>Organisation <em>*</em></span>
+              <input type="text" name="organisation" autocomplete="organization" required maxlength="160" />
+              <small class="err">Please enter your organisation</small>
+            </label>
+            <label class="field">
+              <span>Email <em>*</em></span>
+              <input type="email" name="email" autocomplete="email" required maxlength="160" />
+              <small class="err">Please enter a valid email</small>
+            </label>
+            <label class="field">
+              <span>Phone <em>*</em></span>
+              <input type="tel" name="phone" autocomplete="tel" required pattern="\+?[0-9 \(\)\-]{7,20}" maxlength="20" placeholder="+91" />
+              <small class="err">Please enter a valid phone number</small>
+            </label>
+            <label class="field">
+              <span>Designation</span>
+              <input type="text" name="designation" autocomplete="organization-title" maxlength="120" />
+            </label>
+            <label class="field">
+              <span>City</span>
+              <input type="text" name="city" autocomplete="address-level2" maxlength="80" />
+            </label>
+            <label class="field full">
+              <span>Interested in</span>
+              <select name="interest">
+                <option value="">Select a solution</option>
+                <option>Glance Smart City Platform</option>
+                <option>Emergency Vehicle Preemption</option>
+                <option>School Zone Flashing Beacons</option>
+                <option>Intersection Status &amp; Monitoring</option>
+                <option>Connected Vehicle (C-V2X)</option>
+                <option>Transit &amp; Freight Signal Priority</option>
+                <option>TravelSafely App</option>
+                <option>Streetlight Monitoring</option>
+                <option>Pedestrian Safety &amp; Wrong-Way Detection</option>
+                <option>Partnership / Other</option>
+              </select>
+            </label>
+            <label class="field full">
+              <span>Message</span>
+              <textarea name="message" rows="3" maxlength="2000" placeholder="Tell us about your project"></textarea>
+            </label>
+            <label class="hp" aria-hidden="true">Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+          </div>
+
+          <button type="submit" class="btn btn-primary submit">
+            <span class="label">Submit enquiry</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="form-success" hidden>
+          <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h2>Thank you!</h2>
+          <p>We've received your enquiry. Our India team will contact you shortly.</p>
+          <button type="button" class="btn btn-primary" data-close-form>Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
